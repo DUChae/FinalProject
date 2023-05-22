@@ -1,5 +1,6 @@
+// app.tsx
 import React, {useState} from 'react';
-import {StyleSheet, View, Button} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import LoginScreen from './src/LoginScreen';
 import SignupScreen from './src/SignupScreen';
 
@@ -10,10 +11,17 @@ const App = () => {
     setCurrentScreen('signup');
   };
 
+  const handleGoBack = () => {
+    setCurrentScreen('login');
+  };
+
   return (
     <View style={styles.container}>
-      {currentScreen === 'login' ? <LoginScreen /> : <SignupScreen />}
-      <Button title="회원가입" onPress={handleSignupClick} />
+      {currentScreen === 'login' ? (
+        <LoginScreen handleSignupClick={handleSignupClick} />
+      ) : (
+        <SignupScreen handleGoBack={handleGoBack} />
+      )}
     </View>
   );
 };
